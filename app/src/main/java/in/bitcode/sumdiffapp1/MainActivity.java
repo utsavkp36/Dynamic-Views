@@ -48,35 +48,39 @@ public class MainActivity extends AppCompatActivity {
         btnAddView.setOnClickListener(btnAddDeleteViewSetOnClickListener);
         btnDeleteView.setOnClickListener(btnAddDeleteViewSetOnClickListener);
 
-        btnSum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                double sum=0.0;
-                for(EditText editText:editTextArrayList){
-                    String value=editText.getText().toString();
-                    sum+=Double.parseDouble(value);
-                }
-                txtResult.setText("Result: "+sum);
-            }
-        });
+        btnSum.setOnClickListener(new BtnSumSetOnClickListener());
 
-        btnDiff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                double diff=0.0;
-                for(int i=0;i<editTextArrayList.size();i++){
-                    String value=editTextArrayList.get(i).getText().toString();
-                    double num=Double.parseDouble(value);
-                    if(i==0){
-                        diff+=num;
-                    }
-                    else {
-                        diff -= num;
-                    }
+        btnDiff.setOnClickListener(new BtnDiffSetOnClickListener());
+    }
+
+    private class BtnDiffSetOnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            double diff=0.0;
+            for(int i=0;i<editTextArrayList.size();i++){
+                String value=editTextArrayList.get(i).getText().toString();
+                double num=Double.parseDouble(value);
+                if(i==0){
+                    diff+=num;
                 }
-                txtResult.setText("Result: "+diff);
+                else {
+                    diff -= num;
+                }
             }
-        });
+            txtResult.setText("Result: "+diff);
+        }
+    }
+
+    private class BtnSumSetOnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            double sum=0.0;
+            for(EditText editText:editTextArrayList){
+                String value=editText.getText().toString();
+                sum+=Double.parseDouble(value);
+            }
+            txtResult.setText("Result: "+sum);
+        }
     }
 
     private class BtnAddDeleteViewSetOnClickListener implements View.OnClickListener {
